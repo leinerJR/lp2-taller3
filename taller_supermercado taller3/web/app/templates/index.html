@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Productos | La Canasta{% endblock %}
+{% block content %}
+<h2>Catálogo del supermercado</h2>
+<p>Selecciona una categoría para filtrar los productos.</p>
+<p><a href="/">Todos</a>
+{% for categoria in categorias %}
+ | <a href="/?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>
+{% endfor %}
+</p>
+{% if productos %}
+<div class="productos">
+{% for producto in productos %}
+  <article class="producto">
+    <h3>{{ producto.nombre }}</h3>
+    <p>{{ producto.categoria.nombre }}</p>
+    <p class="precio">${{ "{:,.0f}".format(producto.precio) }} COP</p>
+    <p>Existencias: {{ producto.stock }}</p>
+    <a href="/producto/{{ producto.sku }}">Ver detalle</a>
+  </article>
+{% endfor %}
+</div>
+{% else %}
+<p class="aviso">No se encontraron productos. Comprueba que la API esté funcionando.</p>
+{% endif %}
+{% endblock %}

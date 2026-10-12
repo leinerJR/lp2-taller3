@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Supermercado La Canasta{% endblock %}</title>
+  <style>
+    body{font-family:Arial,sans-serif;max-width:1000px;margin:30px auto;padding:0 16px;background:#f7f8f5;color:#263326}
+    header{background:#176b45;color:white;padding:22px;border-radius:12px}
+    nav a{color:white;margin-right:18px}
+    .productos{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:20px}
+    .producto{background:white;padding:18px;border-radius:10px;border:1px solid #dce5dc}
+    .precio{font-size:1.2em;font-weight:bold;color:#176b45}
+    a{color:#176b45} .aviso{background:#fff4d8;padding:12px;border-radius:8px}
+  </style>
+</head>
+<body>
+<header>
+  <h1>🛒 Supermercado La Canasta</h1>
+  <p>Todo lo que necesitas para tu hogar</p>
+  <nav><a href="/">Productos</a><a href="/categorias">Categorías</a></nav>
+</header>
+<main>{% block content %}{% endblock %}</main>
+</body>
+</html>

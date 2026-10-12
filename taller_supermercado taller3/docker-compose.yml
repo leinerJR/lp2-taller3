@@ -1,0 +1,39 @@
+services:
+  database:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: supermercado_user
+      POSTGRES_PASSWORD: cambia_esta_clave
+      POSTGRES_DB: supermercado_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - datos_supermercado:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U supermercado_user -d supermercado_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: ./api
+    environment:
+      DATABASE_URL: postgresql://supermercado_user:cambia_esta_clave@database:5432/supermercado_db
+    ports:
+      - "8000:8000"
+    depends_on:
+      database:
+        condition: service_healthy
+
+  web:
+    build: ./web
+    environment:
+      SECRET_KEY: clave-de-prueba-cambiar
+      API_URL: http://api:8000
+    ports:
+      - "5000:5000"
+    depends_on:
+      - api
+
+volumes:
+  datos_supermercado:

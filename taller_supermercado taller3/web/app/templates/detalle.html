@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Detalle | La Canasta{% endblock %}
+{% block content %}
+<h2>Detalle del producto</h2>
+<article class="producto">
+  <h3>{{ producto.nombre }}</h3>
+  <p><b>Código:</b> {{ producto.sku }}</p>
+  <p><b>Categoría:</b> {{ producto.categoria.nombre }}</p>
+  <p class="precio">${{ "{:,.0f}".format(producto.precio) }} COP</p>
+  <p><b>Unidades disponibles:</b> {{ producto.stock }}</p>
+</article>
+<p><a href="/">← Volver al catálogo</a></p>
+{% endblock %}
